@@ -8,7 +8,7 @@ export default function ProjectList() {
   return (
     <ul className="flex flex-wrap justify-between">
       {projects.map(({ id, name, description }) => (
-        <li key={id} className="mb-3 p-5 border rounded shadow-sm  w-[225px]">
+        <li key={id} className="mb-3 p-5 border rounded shadow-sm  w-[260px]">
           <h3 className="font-bold text-lg">{name}</h3>
           {description && <p className="text-gray-600">{description}</p>}
           <button

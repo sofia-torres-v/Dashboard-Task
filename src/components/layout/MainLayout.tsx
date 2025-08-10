@@ -6,8 +6,9 @@ export default function MainLayout() {
 
   return (
     <div className="flex min-h-screen">
-      <aside className="w-64 bg-gray-800 text-white p-4 flex flex-col justify-between">
-        <div>
+      <aside className="w-64 bg-gray-800 text-white p-4 h-screen flex flex-col relative">
+        {/* Menú scrollable si crece mucho */}
+        <div className="overflow-y-auto flex-1 mb-16">
           <h2 className="text-xl font-bold mb-4">Panel</h2>
           <nav className="flex flex-col gap-2">
             <Link to="/" className="hover:bg-gray-700 p-2 rounded">
@@ -21,15 +22,18 @@ export default function MainLayout() {
             </Link>
           </nav>
         </div>
+
+        {/* Botón siempre visible abajo */}
         <button
           onClick={logout}
-          className="mt-4 bg-red-600 hover:bg-red-700 transition rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-red-400"
+          className="absolute bottom-4 left-4 right-4 bg-red-600 hover:bg-red-700 transition rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-red-400"
         >
           Cerrar sesión
         </button>
       </aside>
 
-      <main className="flex-1 p-6 bg-gray-100">
+      {/* Contenido principal scrollable */}
+      <main className="flex-1 p-6 bg-gray-100 overflow-y-auto max-h-screen">
         <Outlet />
       </main>
     </div>

@@ -14,13 +14,13 @@ export default function Dashboard() {
   const ultimasTareas = tasks.slice(-5).reverse();
 
   return (
-    <div>
+    <div className="max-w-4xl mx-auto p-4">
       <h1 className="text-3xl font-bold mb-6">
         {user ? `¡Hola, ${user.username}!` : "Dashboard"}
       </h1>
 
       <section className="mb-6">
-        <h2 className="text-xl font-semibold mb-2">Visualiza el estado actual de tus proyectos y tareas, con estadísticas rápidas para un mejor control.</h2>
+        <h2 className="text-xl font-semibold mb-5">Visualiza el estado actual de tus proyectos y tareas, con estadísticas rápidas para un mejor control.</h2>
         <div className="flex gap-6 flex-wrap">
           <div className="bg-blue-200 p-4 rounded shadow w-32 text-center">
             <p className="text-2xl font-bold">{projects.length}</p>

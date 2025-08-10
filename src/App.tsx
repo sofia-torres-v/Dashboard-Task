@@ -6,9 +6,9 @@ import PrivateRoute from "./components/PrivateRoute";
 import MainLayout from "./components/layout/MainLayout";
 import Dashboard from "./pages/Dashboard";
 import Login from "./pages/Login";
-import "./index.css";
 import Projects from "./pages/Projects";
 import Tasks from "./pages/Tasks";
+import "./index.css";
 
 export default function App() {
   return (
@@ -16,7 +16,6 @@ export default function App() {
       <AuthProvider>
         <ProjectProvider>
           <TaskProvider>
-
             <Routes>
               <Route path="/login" element={<Login />} />
               <Route

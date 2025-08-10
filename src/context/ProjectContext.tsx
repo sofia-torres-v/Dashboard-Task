@@ -1,7 +1,6 @@
 import { createContext, useContext, useState, useEffect, type ReactNode } from "react";
-import type { Project } from "../types/index";
-
 import { fetchProjects } from "../services/ProjectsService";
+import type { Project } from "../types/index";
 
 type ProjectContextType = {
   projects: Project[];

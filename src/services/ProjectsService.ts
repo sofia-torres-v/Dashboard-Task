@@ -9,7 +9,7 @@ export async function fetchProjects(): Promise<Project[]> {
   const res = await fetch("https://dummyjson.com/users");
   if (!res.ok) throw new Error("Error al cargar proyectos");
   const data = await res.json();
-  console.log("Datos usuarios:", data); // Revisa aquí
+  console.log("Datos usuarios:", data); 
 
   return data.users.map((user: any) => ({
     id: user.id,
