@@ -64,3 +64,14 @@ export default function AddTaskForm() {
     </form>
   );
 }
+
+// import AddTaskForm from "../components/tasks/AddTaskForm";
+
+// export default function Dashboard() {
+//   return (
+//     <div>
+//       <AddTaskForm />
+//       {/* Otros componentes */}
+//     </div>
+//   );
+// }

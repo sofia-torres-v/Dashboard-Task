@@ -9,7 +9,6 @@ type AuthContextType = {
   loading: boolean;
 };
 
-
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export function AuthProvider({ children }: { children: ReactNode }) {
@@ -25,19 +24,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setLoading(false);
   }, []);
 
-  useEffect(() => {
-    const storedUser = localStorage.getItem("user");
-    if (storedUser) {
-      setUser(JSON.parse(storedUser));
-    }
-  }, []);
-
   const login = async (username: string, password: string) => {
     try {
       const userData = await loginUser(username, password);
       setUser(userData);
       localStorage.setItem("user", JSON.stringify(userData));
-      navigate("/");  
+      navigate("/");
     } catch (err) {
       alert("Usuario o contraseña incorrectos");
     }

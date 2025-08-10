@@ -2,7 +2,7 @@ import { useTasks } from "../../context/TaskContext";
 import { useProjects } from "../../context/ProjectContext";
 import type { TaskStatus } from "../../types";
 
-import { useState } from "react";
+import{ useState } from "react";
 
 
 export default function TaskList() {

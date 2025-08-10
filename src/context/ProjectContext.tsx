@@ -1,58 +1,53 @@
 import { createContext, useContext, useState, useEffect, type ReactNode } from "react";
 import type { Project } from "../types/index";
 
+import { fetchProjects } from "../services/ProjectsService";
+
 type ProjectContextType = {
   projects: Project[];
+  loading: boolean;
+  error: string | null;
   addProject: (project: Omit<Project, "id" | "createdAt">) => void;
   removeProject: (id: number) => void;
-  updateProject: (updated: Project) => void;
 };
 
 const ProjectContext = createContext<ProjectContextType | undefined>(undefined);
 
 export function ProjectProvider({ children }: { children: ReactNode }) {
-  const [projects, setProjects] = useState<Project[]>([
-    {
-      id: 1,
-      name: "Proyecto Demo",
-      description: "Proyecto de ejemplo para probar",
-      createdAt: new Date().toISOString(),
-    },
-  ]);
+  const [projects, setProjects] = useState<Project[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  // Carga inicial (podría venir de localStorage o API)
   useEffect(() => {
-    const stored = localStorage.getItem("projects");
-    if (stored) setProjects(JSON.parse(stored));
+    async function loadProjects() {
+      setLoading(true);
+      try {
+        const data = await fetchProjects();
+        setProjects(data);
+      } catch (err) {
+        setError((err as Error).message);
+      } finally {
+        setLoading(false);
+      }
+    }
+    loadProjects();
   }, []);
 
-  useEffect(() => {
-    localStorage.setItem("projects", JSON.stringify(projects));
-  }, [projects]);
-
-  function addProject(project: Omit<Project, "id" | "createdAt">) {
+  const addProject = (project: Omit<Project, "id" | "createdAt">) => {
     const newProject: Project = {
-      id: Date.now(),
+      id: projects.length + 1,
       createdAt: new Date().toISOString(),
       ...project,
     };
-    setProjects((prev) => [...prev, newProject]);
-  }
+    setProjects([...projects, newProject]);
+  };
 
-  function removeProject(id: number) {
-    setProjects((prev) => prev.filter((p) => p.id !== id));
-  }
-
-  function updateProject(updated: Project) {
-    setProjects((prev) =>
-      prev.map((p) => (p.id === updated.id ? updated : p))
-    );
-  }
+  const removeProject = (id: number) => {
+    setProjects((prev) => prev.filter((project) => project.id !== id));
+  };
 
   return (
-    <ProjectContext.Provider
-      value={{ projects, addProject, removeProject, updateProject }}
-    >
+    <ProjectContext.Provider value={{ projects, loading, error, addProject, removeProject }}>
       {children}
     </ProjectContext.Provider>
   );

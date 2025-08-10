@@ -6,9 +6,9 @@ export default function ProjectList() {
   if (projects.length === 0) return <p>No tienes proyectos creados.</p>;
 
   return (
-    <ul>
+    <ul className="flex flex-wrap justify-between">
       {projects.map(({ id, name, description }) => (
-        <li key={id} className="mb-3 p-3 border rounded shadow-sm">
+        <li key={id} className="mb-3 p-5 border rounded shadow-sm  w-[225px]">
           <h3 className="font-bold text-lg">{name}</h3>
           {description && <p className="text-gray-600">{description}</p>}
           <button
